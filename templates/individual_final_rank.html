@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+    <h1>Végeredmény - {{ event.name }}</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Helyezés</th>
+                <th>Név</th>
+                <th>Eredmény</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <td>{{ loop.index }}.</td>  <!-- Helyezés: a loop.index az aktuális sorszám -->
+                <td>{{ participant.name }}</td>
+                <td>
+                    {% if participant.score %}
+                    {% if event.sport_type == "throwing" %}
+                    {{ participant.score }} m
+                    {% else %}
+                    {{ participant.score }} s
+                    {% endif %}
+                    {% else %}
+                        Nincs eredmény
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('list_participants', event_id=event.id) }}" class="btn btn-secondary">Vissza a résztvevők listájához</a>
+    </div>
+</div>
+{% endblock %}
+

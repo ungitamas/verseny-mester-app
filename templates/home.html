@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flashes">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+{% endwith %}
+
+{% if current_user.is_authenticated %}
+<h1 class="display-5">Üdv a Versenymester oldalán {{current_user.username}}! 👋</h1>
+<h3>Próbáld ki az oldalt! </h3>
+{% else %}
+<h1 class="display-5">Üdv a Versenymester oldalán! 👋</h1>
+<h3>Próbáld ki az oldalt! </h3>
+<p class="lead">Regisztrálj vagy lépj be</p>
+{% endif %}
+
+
+</div>
+{% endblock %}

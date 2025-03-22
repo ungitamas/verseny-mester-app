@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<body class="bg-default">
+<div class="container py-5 bg-light">
+<h1>Mérkőzés eredményeinek bevitele</h1>
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        {% set category, message = messages[0] %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <h3>{{ match.team1.name }} vs. {{ match.team2.name }}</h3>
+
+        <div class="form-group">
+            <label>{{ form.team1_score.label }} {{ match.team1.name }}</label>
+            {{ form.team1_score(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.team2_score.label }} {{ match.team2.name }}</label>
+            {{ form.team2_score(class="form-control") }}
+        </div>
+        {{ form.match_id }}
+        <hr>
+
+        <button type="submit" class="btn btn btn-secondary">Eredmények Mentése</button>
+    </form>
+
+    {% if type_of_match=="group_match" %}
+    <div style="margin: 20px 0;">
+        <a href="{{ url_for('groups_overview', event_id=event.id) }}" class="btn btn btn-secondary">Csoportok áttekintése</a>
+    </div>
+    <div style="margin: 20px 0;">
+        <a href="{{ url_for('select_match', event_id=event.id) }}" class="btn btn btn-secondary">Vissza a mérkőzésekhez</a>
+    </div>
+    {% elif type_of_match=="advance_to_knock_out" %}
+    <div style="margin: 20px 0;">
+        <a href="{{ url_for('advance_to_knockout', event_id=event.id) }}" class="btn btn btn-secondary">Vissza a mérkőzésekhez</a>
+    </div>
+    {% else %}
+    <div style="margin: 20px 0;">
+        <a href="{{ url_for('list_knockout_stage_matches', event_id=event.id, group_id=group_id) }}" class="btn btn btn-secondary">Vissza a mérkőzésekhez</a>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
+

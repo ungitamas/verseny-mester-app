@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+
+<h1>{{event.name}} kezelése {% if event.sport_type=="football" %} ⚽️ {% endif %} </h1>
+<div class="container">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="{{ url_for('add_team', event_id=event.id) }}" role="button" aria-pressed="true"><button type="button" class="btn btn-info">Csapatok</button></a>
+             
+        
+        {% if matches %}
+    <a class="nav-item nav-link" href="{{ url_for('list_of_round_robin_matches', event_id=event.id, group_id=max_group_id) }}"  role="button" aria-pressed="true"><button type="button" class="btn btn-info">Mérkőzések</button></a>
+       
+        <a class="nav-item nav-link" href="{{ url_for('round_robin_overview', event_id=event.id) }}"  role="button" aria-pressed="true"><button type="button" class="btn btn-info">Tabella</button></a>
+        {% endif %}
+        {% if event.is_ended %}
+        <a class="nav-item nav-link" href="{{ url_for('event_result', event_id=event.id) }}"  role="button" aria-pressed="true"><button type="button" class="btn btn-info">Végeredmény</button></a>
+        {% endif %}
+        
+  
+      </div> 
+</div>
+</div>
+
+{% endblock %}

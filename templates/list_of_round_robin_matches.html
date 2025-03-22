@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+<h1>Mérkőzés kiválasztása</h1>
+{% if event.sport_type == "volleyball" %}
+<div class="alert alert-info"">
+    A Röplabda esetén a szett győzelmeket kérjük rögzíteni!
+</div>
+{% endif %}
+<div class="container">
+    
+        
+        <ul class="list-group">
+            {% for match in matches %}
+            <li class="list-group-item">
+                
+                {% if not event.is_ended %}
+                {% if match.team1_score is none and match.team2_score is none %}
+                <a href="{{ url_for('enter_result', event_id=event.id, match_id=match.id) }}" class="btn btn-warning active" role="button" aria-pressed="true">
+                    {{ match.team1.name }} vs. {{ match.team2.name }}
+                    {% else %}
+                    <a href="{{ url_for('enter_result', event_id=event.id, match_id=match.id) }}" class="btn btn-success  active" role="button" aria-pressed="true">
+                        {{ match.team1.name }} vs. {{ match.team2.name }}
+                        {{ match.team1_score }} : {{ match.team2_score }}
+                    {% endif %}
+                </a>
+                {% else %}
+                <button type="button" class="btn btn-warning" disabled>
+                    {{ match.team1.name }} vs. {{ match.team2.name }}
+                    {% if match.team1_score is not none and match.team2_score is not none %}
+                    {{ match.team1_score }} : {{ match.team2_score }}
+                    {% endif %}
+                </button>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+
+        {% if not not_draw_in_group and (event.sport_type == "basketball" or event.sport_type == "volleyball") %}
+            <div class="alert alert-warning" role="alert">
+                Ebben a sportágban nem lehet döntetlen eredmény. 
+            </div>
+    {% else %}
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('round_robin_overview', event_id=event.id) }}" class="btn btn-secondary">Tabella</a>
+        </div>
+    {% endif %}
+    
+
+        {% if round_robin_checker and not event.is_ended %}
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('close_round_robin_event', event_id=event.id) }}" class="btn btn-secondary">Esemény lezárása</a>
+            <div class="alert alert-danger" role="alert">
+                Ha lezárod az eseményt, akkor később már nem tudod módosítani az eredményeket!
+            </div>
+        </div>
+        {% endif %}
+        {% if event.is_ended %}
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('event_result', event_id=event.id) }}" class="btn btn-secondary">Végeredmény</a>
+        </div>
+        {% endif %}
+</div>
+</div>
+{% endblock %}
+
+

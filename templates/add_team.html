@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+
+  <h1>
+    
+    {{event.name}} csapatok hozzáadása
+    
+</h1>
+
+    
+    {% if not existing_groups %}
+  
+    {% endif %}
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+      {{ form.name.label() }} {{ form.name(class="form-control") }}
+      <br>
+      <div>
+        {{ form.submit(class="btn btn btn-secondary", type="submit", style="margin: 10px 15px") }}
+      </div>
+    </form>
+    
+    <ol class="list-group">
+      {% for team in teams %}
+      <li class="list-group-item">
+          {{ loop.index }}. {{ team.name }}
+          <form method="POST" action="{{ url_for('del_team') }}" style="display:inline;">
+              <input type="hidden" name="team_id" value="{{ team.id }}">
+              <input type="hidden" name="event_id" value="{{ event.id }}">
+              {% if not existing_groups %}
+              <button type="submit" class="btn btn-danger">Törlés</button>
+              {% endif %}
+          </form>
+      </li>
+      {% endfor %}
+  </ol>
+  
+  
+
+    {% if event.event_type=='round_robin' and teams|length >= 2%}
+    
+    <a href="{{ url_for('create_groups', event_id=event.id) }}" class="btn btn btn-secondary">Körmékőzések</a>
+    {% endif %}
+
+
+    {% if event.event_type=='knockout' %}
+    {% if teams|length == 2 or teams|length == 4 or teams|length == 8 or teams|length == 16 or teams|length == 32 %}
+    <a href="{{ url_for('create_groups', event_id=event.id) }}" class="btn btn btn-secondary">Irány az első kör</a>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+      Az első kieséses szakasz létrohozásához 2, 4, 8, 16 vagy 32 csapat szükséges
+    </div>
+    {% endif %}
+    {% endif %}
+
+    
+    {% if event.event_type=='group_knockout' %}
+    {% if teams|length >= event.num_of_groups * 2 %}
+    <a href="{{ url_for('create_groups', event_id=event.id) }}" class="btn btn btn-secondary">Csoportbeosztások</a>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+      A csoportok létrehozásához legalább {{ event.num_of_groups * 2 }} csapat szükséges.
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
+{% endblock %}
+
+    

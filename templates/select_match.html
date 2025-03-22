@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+
+<h1>Mérkőzés kiválasztása</h1>
+<div class="container">
+    {% for group_name, matches in group_matches.items() %}
+        <h2>{{ group_name }}</h2>
+        <ul class="list-group">
+            {% for match in matches %}
+            <li class="list-group-item">
+                {% if not existing_next_stage %}
+                {% if match.team1_score is none and match.team2_score is none %}
+                <a href="{{ url_for('enter_result', event_id=event.id, match_id=match.id) }}" class="btn btn-warning active" role="button" aria-pressed="true">
+                    {{ match.team1.name }} vs. {{ match.team2.name }}
+                    {% else %}
+                    <a href="{{ url_for('enter_result', event_id=event.id, match_id=match.id) }}" class="btn btn-success  active" role="button" aria-pressed="true">
+                        {{ match.team1.name }} vs. {{ match.team2.name }}
+                        {{ match.team1_score }} : {{ match.team2_score }}
+                    {% endif %}
+                </a>
+                {% else %}
+                <button type="button" class="btn btn-warning" disabled>
+                    {{ match.team1.name }} vs. {{ match.team2.name }}
+                    {% if match.team1_score is not none and match.team2_score is not none %}
+                    {{ match.team1_score }} : {{ match.team2_score }}
+                    {% endif %}
+                </button>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('groups_overview', event_id=event.id) }}" class="btn btn-secondary">Csoportok állása</a>
+    </div>
+    
+    {% if all_check_true %}
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('advance_to_knockout', event_id=event.id) }}" class="btn btn-secondary">Irány a kieséses szakasz</a>
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        A kieséses szakasz akkor tudjuk elkezdeni, ha minden csoportmérkőzésnek van eredménye rögzítve.
+    </div>
+    {% endif %}
+
+
+
+
+</div>
+</div>
+
+{% endblock %}
+

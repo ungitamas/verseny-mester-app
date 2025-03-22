@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+    <h1>Egyéni eredmény hozzáadása - {{ participant.name }}</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label>{{ form.score.label }}</label>
+            {{ form.score(class="form-control") }}
+        </div>
+        {% if event.sport_type=="throwing" %}
+        <div class="alert alert-warning" role="alert">
+            Az eredményt méterben kérjük rögzíteni a következő formátumban: 45.67
+        </div>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Az eredményt másodpercben kérjük rögzíteni a következő formátumban: 45.67
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-secondary">Eredmény hozzáadása</button>
+    </form>
+
+    <!-- Vissza a listához gomb -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('list_participants', event_id=event_id) }}" class="btn btn-secondary">Vissza a résztvevők listájához</a>
+    </div>
+</div>
+{% endblock %}

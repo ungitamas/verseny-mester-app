@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+
+  <!-- Flash üzenetek megjelenítése -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+
+  <!-- Űrlap megjelenítése -->
+  <form method="POST">
+    {{form.hidden_tag()}}
+    <div class="form-group">
+      {{form.email.label}}{{form.email(class="form-control")}}
+    </div>
+    <div class="form-group">
+      {{form.username.label}}{{form.username(class="form-control")}}
+    </div>
+    <div class="form-group">
+      {{form.password.label}}{{form.password(class="form-control")}}
+    </div>
+    <div class="form-group">
+      {{form.pass_confirm.label}}{{form.pass_confirm(class="form-control")}}
+    </div>
+    <div class="form-group">
+      {{form.submit(class="btn btn btn-secondary")}}
+    </div>
+  </form>
+
+</div>
+{% endblock %}

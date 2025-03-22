@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+    <h1>
+        
+        Csapatok hozzárendelése {{ event.name }} eseményhez
+        
+        </h1>
+{% if not existing_matches %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.team.label }}<br>
+        {{ form.team(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.group.label }}<br>
+        {{ form.group(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn btn-secondary") }}
+    </div>
+</form>
+{% endif %}
+
+    <h2>Jelenlegi csapatok és csoportok:</h2>
+    <ol class="list-group">
+        {% for team in teams %}
+            <li class="list-group-item">
+                {{ loop.index }}. {{ team.name }} 
+              - Csoport: 
+              
+              {% for group in groups %}
+                {% if group.id == team.group_id %}
+                    {{ group.name }} 
+                {% endif %}
+              
+              {% endfor %}
+              
+            </li>
+        {% endfor %}
+        </ul>
+
+    <h2>Elérhető csoportok:</h2>
+    <ul class="list-group">
+    {% for group in groups[:event.num_of_groups] %}
+        <li class="list-group-item">{{ group.name }}</li>
+    {% endfor %}
+    {% if all_assigned %}
+    <div>
+    <a href="{{ url_for('create_group_matches', event_id=event.id) }}" class="btn btn-secondary">Tovább a mérkőzésekre</a>
+</div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        Minden csapatnak kell, hogy legyen csoportja
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+

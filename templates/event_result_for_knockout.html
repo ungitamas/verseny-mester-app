@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+    <h1>Az esemény végeredménye {{ event.name }}</h1>
+    <h2>🥇 1. helyezett</h2>
+    <ul class="list-group">
+        <li class="list-group-item">{{ final_winner.name }}</li>
+    </ul>
+    <h2>🥈 2. helyezett</h2>
+    <ul class="list-group">
+    <li class="list-group-item">{{ final_loser[0].name }}</li>
+</ul>
+    {% if losers_s %}
+    <h2>🥉 3. helyezettek</h2>
+    <ul class="list-group">
+        {% for team in losers_s %}
+        <li class="list-group-item">{{ team.name }}</li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+    
+    {% if losers_q %}
+    <h2>5. helyezettek</h2>
+    <ul class="list-group">
+        {% for team in losers_q %}
+        <li class="list-group-item">{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    
+    {% if losers_r16 %}
+    <h2>9. helyezettek</h2>
+    <ul class="list-group">
+        {% for team in losers_r16 %}
+        <li class="list-group-item">{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    {% if losers_r32 %}
+    <h2>17. helyezettek</h2>
+    <ul class="list-group">
+        {% for team in losers_r32 %}
+        <li class="list-group-item">{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    
+</div>
+{% endblock %}

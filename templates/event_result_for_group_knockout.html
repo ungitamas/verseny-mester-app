@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+{% if event.event_type == "group_knockout" and event.num_of_groups == 4 %}
+<div class="container">
+    <h1>Az esemény végeredménye {{ event.name }}</h1>
+    <h2>🥇 1. helyezett</h2>
+    <ul class="list-group">
+        <li class="list-group-item">{{ final_winner.name }}</li>
+    </ul>
+    <h2>🥈 2. helyezett</h2>
+    <ul class="list-group">
+    <li class="list-group-item">{{ final_loser[0].name }}</li>
+</ul>
+    {% if losers_s %}
+    <h2>🥉 3. helyezettek</h2>
+    <ul class="list-group">
+        {% for team in losers_s %}
+        <li class="list-group-item">{{ team.name }}</li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+    
+    {% if losers_q %}
+    <h2>5. helyezettek</h2>
+    <ul class="list-group">
+        {% for team in losers_q %}
+        <li class="list-group-item">{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    
+        {% if group_out_teams %}
+    <h2>9. helyezettek:</h2>
+    <ul class="list-group">
+        {% for team in group_out_teams %}
+        <li class="list-group-item">{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+    </div>
+        {% endif %}
+
+        {% if event.event_type == "group_knockout" and event.num_of_groups == 2 %}
+<div class="container">
+    <h1>Az esemény végeredménye {{ event.name }}</h1>
+    <h2>1. helyezett</h2>
+    <p>{{ final_winner.name }}</p>
+    <h2>2. helyezett</h2>
+    <p>{{ final_loser[0].name }}</p>
+    <h2>3. helyezettek:</h1>
+        {% for team in losers_s %}
+        <p>{{ team.name }}</p>
+        {% endfor %}
+        {% if group_out_teams %}
+    <h2>5. helyezettek:</h1>
+        {% for team in group_out_teams %}
+        <p>{{ team.name }}</p>
+        {% endfor %}
+        {% endif %}
+    </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

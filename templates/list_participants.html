@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+    <h1>Résztvevők listája</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>Eredmény</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <!-- Név oszlop -->
+                <td>{{ participant.name }}</td>
+
+                <!-- Eredmény oszlop -->
+                <td>
+
+                    {% if participant.score %}
+                    {% if event.sport_type == "throwing" %}
+                    {{ participant.score }} m
+                    {% else %}
+                    {{ participant.score }} s
+                    {% endif %}
+                    {% else %}
+                        Nincs eredmény
+                    {% endif %}
+                </td>
+
+                <!-- Eredmény rögzítése gomb -->
+                <td>
+                    <a href="{{ url_for('add_individual_result', event_id=event_id, participant_id=participant.id) }}" class="btn btn-secondary">
+                        Eredmény rögzítése
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Vissza a listához gomb -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('individual_final_rank', event_id=event.id) }}" class="btn btn-secondary">Végeredmény számítása</a>
+    </div>
+</div>
+{% endblock %}
+
+

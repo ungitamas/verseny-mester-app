@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+<h1>Mérkőzés kiválasztása {{ event.name }}</h1>
+<div class="container">
+    {% if final_winner %}
+        <h2>Végeredmény: 🏆 {{ final_winner.name }} a bajnok! 🏆</h2>
+        <div style="margin: 20px 0;">
+            <a href="{{ url_for('event_result', event_id=event.id) }}" class="btn btn btn-secondary">Eredmények megtekintése</a>
+        </div>
+    {% endif %}
+    
+ 
+</div>
+</div>
+{% endblock %}
+

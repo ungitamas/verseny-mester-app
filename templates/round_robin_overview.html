@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+
+    <h1>Csoportok Áttekintése</h1>
+    <div class="container-fluid">
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('list_of_round_robin_matches', event_id=event.id) }}"
+                class="btn btn-secondary">Eredmények</a>
+        </div>
+        {% for group_name, teams in group_data.items() %}
+        <h3 class="mt-4">{{ group_name }} csoport</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Csapat</th>
+                        <th>Mérkőzések</th>
+                        <th>Lőtt gólok</th>
+                        <th>Kapott gólok</th>
+                        <th>Gólkülönbség</th>
+                        <th>Győzelmek</th>
+                        <th>Döntetlenek</th>
+                        <th>Vereségek</th>
+                        <th>Pontok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                    <tr>
+                        <td>{{ team.team_name }}</td>
+                        <td>{{ team.played_games }}</td>
+                        <td>{{ team.scored_goals }}</td>
+                        <td>{{ team.conceded_goals }}</td>
+                        <td>{{ team.goal_difference }}</td>
+                        <td>{{ team.wins }}</td>
+                        <td>{{ team.draws }}</td>
+                        <td>{{ team.losses }}</td>
+                        <td>{{ team.points }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

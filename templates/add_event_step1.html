@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+  <h1>Esemény hozzáadása</h1>
+  <p>Adj hozzá egy eseményt:</p>
+
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+            {{ form.name.label() }} {{ form.name(class="form-control") }}
+          </div>
+            <br>
+            <div class="form-group">
+            {{ form.date.label }} {{ form.date(class="form-control datepicker") }}
+          </div>
+            <br>
+            <div class="form-group">
+            {{ form.sport_type.label }} {{ form.sport_type(class="custom-select" ) }}
+          </div>
+            <br>
+
+        <div>
+            {{ form.submit(class="btn btn btn-secondary", type="submit", style="margin: 10px 15px") }}
+          </div>
+    </form>
+</div>
+
+{% endblock %}
+    

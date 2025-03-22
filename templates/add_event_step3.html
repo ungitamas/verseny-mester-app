@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+  <h1>Esemény hozzáadása - 3. lépés</h1>
+  <p>Válaszd ki a csoportok számát</p>
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.num_of_groups.label }} {{ form.num_of_groups(class="custom-select" ) }}
+      </div>
+      <br>
+      <div>
+        {{ form.submit(class="btn btn btn-secondary", type="submit", style="margin: 10px 15px") }}
+      </div>
+
+    </form>
+</div>
+
+{% endblock %}

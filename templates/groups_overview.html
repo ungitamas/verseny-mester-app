@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5 bg-light">
+<h1>Csoportok Áttekintése</h1>
+<div class="container">
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('select_match', event_id=event.id) }}" class="btn btn-secondary">Eredmények felvétele</a>
+    </div>
+    {% for group_name, teams in group_data.items() %}
+        <h2>{{ group_name }}</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Csapat</th>
+                    <th>Mérkőzések</th>
+                    <th>Rúgott gólok</th>
+                    <th>Kapott gólok</th>
+                    <th>Gólkülönbség</th>
+                    <th>Győzelmek</th>
+                    <th>Döntetlenek</th>
+                    <th>Vereségek</th>
+                    <th>Pontok</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams %}
+                <tr>
+                    <td>{{ team.team_name }}</td>
+                    <td>{{ team.played_games }}</td>
+                    <td>{{ team.scored_goals }}</td>
+                    <td>{{ team.conceded_goals }}</td>
+                    <td>{{ team.goal_difference }}</td>
+                    <td>{{ team.wins }}</td>
+                    <td>{{ team.draws }}</td>
+                    <td>{{ team.losses }}</td>
+                    <td>{{ team.points }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}
+

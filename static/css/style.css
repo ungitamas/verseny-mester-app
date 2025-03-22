@@ -1,0 +1,72 @@
+.container.py-5.bg-light {
+    opacity: 0.95 !important;
+}
+
+
+/* Football background */
+.bg-football {
+    background-image: url('/static/images/football.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  /* Basketball background */
+  .bg-basketball {
+    background-image: url('/static/images/basketball.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  /* Handball background */
+  .bg-handball {
+    background-image: url('/static/images/handball.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  /* Volleyball background */
+  .bg-volleyball {
+    background-image: url('/static/images/volleyball.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Throwing background */
+.bg-throwing {
+    background-image: url('/static/images/throwing.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Running background */
+.bg-running {
+    background-image: url('/static/images/running.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Swimming background */
+.bg-swimming {
+    background-image: url('/static/images/swimming.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+  
+  /* Default background */
+  .bg-default {
+    background-image: url('/static/images/default.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  

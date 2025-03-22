@@ -1,0 +1,9 @@
+python3.12 -m pip install <csomagnév>
+
+py -m pip install --upgrade pip
+py -m pip install Flask
+py -m pip install Flask-SQLAlchemy Flask-Migrate Flask-WTF WTForms 
+py -m pip install Flask-Bcrypt
+py -m pip install Werkzeug
+py -m pip install email-validator
+py -m pip install Flask-Login
