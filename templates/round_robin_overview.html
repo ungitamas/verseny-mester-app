@@ -6,13 +6,14 @@
     <div class="container-fluid">
         <div style="margin-top: 20px;">
             <a href="{{ url_for('list_of_round_robin_matches', event_id=event.id) }}"
-                class="btn btn-secondary">Eredmények</a>
+                class="btn btn-secondary table-button">Eredmények</a>
         </div>
         {% for group_name, teams in group_data.items() %}
         <div class="table-responsive">
             <table class="table table-striped table-bordered align-middle text-center">
                 <thead class="table-dark">
                     <tr>
+                        <th>Hely</th>
                         <th>Csapat</th>
                         <th>M</th>
                         <th>LG</th>
@@ -27,6 +28,7 @@
                 <tbody>
                     {% for team in teams %}
                     <tr>
+                        <td>{{ loop.index }}.</td>
                         <td>{{ team.team_name }}</td>
                         <td>{{ team.played_games }}</td>
                         <td>{{ team.scored_goals }}</td>

@@ -70,10 +70,6 @@
     background-attachment: fixed;
   }
   
-  .btn-secondary {
-    margin-bottom: 25px;
-  }
-
-
-
-
+.table-button {
+  margin-bottom: 25px;
+}
